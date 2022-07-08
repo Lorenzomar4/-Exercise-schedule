@@ -6,15 +6,19 @@ class User(
     val surname: String,
     val dateOfBirth: LocalDate,
 ) {
+
     val listOfFriends: MutableList<User> = mutableListOf()
     var pulse = 0
     var daysOfTraining: MutableMap<Int, Int> = mutableMapOf()
     var percentageOfTraining = 0f
     val listOfMuscleTrain = mutableListOf<Muscle>()
+    lateinit var conformanceCriterion: ConformanceCriterion
+
 
     fun toAssignDaysDefault() {
         (1..7).forEachIndexed { index, value -> daysOfTraining[value] = 0 }
     }
+    fun isSatisfied(anRoutine: Routine) = conformanceCriterion.canBeFulfilled(this,anRoutine)
 
     fun enterMuscleForTraining(anMuscle: Muscle) {
         listOfMuscleTrain.add(anMuscle)
@@ -89,7 +93,11 @@ class User(
 
     fun frequencyCardiacOfTraining()=frequencyCardiacReserve()*(percentageOfTraining/100)  + frequencyCardiacInRepose()
 
+    fun canDoTheRoutine(anRoutine: Routine) =anRoutine.isCompletyAndHealthy(this)
+
 }
+
+
 typealias pulseOutOflimit = java.lang.RuntimeException
 typealias dayIncorrect = java.lang.RuntimeException
 typealias percentageIncorrect = java.lang.RuntimeException

@@ -21,17 +21,22 @@ class TestRuotine : DescribeSpec({
     )
     val lawrence = User("Lawrence", "Martinez", LocalDate.of(1998, 11, 8)).apply {
         assignPulse(70)
+        conformanceCriterion = TheConformist()
     }
 
     val anRoutine = Routine("anRutine", lawrence, "unknown")
     val carmen = User("Carmen", "Jonhson", LocalDate.of(1998, 11, 8)).apply {
         assignPulse(70)
+        conformanceCriterion = TheNegate()
+
     }
     val romina = User("Romina", "Jonhson", LocalDate.of(1998, 11, 8)).apply {
         assignPulse(70)
+
     }
     val facundo = User("Facundo", "Jonhson", LocalDate.of(1998, 11, 8)).apply {
         assignPulse(70)
+
     }
 
     describe("test rutine") {
@@ -125,10 +130,24 @@ class TestRuotine : DescribeSpec({
         }
         it(
             "but if added exercise  whithout all muscles basic then return false because all exercise must" +
-                    "training the three basic muscle"
+                    "training the three basic muscle and the criterion of she is TheNegate"
         ) {
             anRoutine.addExcercise(anExcercice2)
             anRoutine.isCompletyFor(carmen) shouldBe false
         }
     }
+    describe("Testing the method isHealthy of routina") {
+        it("is not healthy") { //192-127
+            lawrence.assigPorcentOfTraining(1f)
+            anRoutine.isHealthy(lawrence) shouldBe false
+
+        }
+        it("is healthy ") {
+            lawrence.assigPorcentOfTraining(90f)
+            anRoutine.isHealthy(lawrence) shouldBe true
+            anRoutine.isCompletyFor(lawrence) shouldBe true
+        }
+
+    }
+
 })

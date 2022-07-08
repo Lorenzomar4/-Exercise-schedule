@@ -13,12 +13,18 @@ class Routine(
     fun addExcercise(anExcercise: Excercise) {
         listOfExcercise.add(anExcercise)
     }
-    fun removeAllExcercie (){
-        listOfExcercise.clear()
 
+    fun removeAllExcercie() {
+        listOfExcercise.clear()
     }
 
+    fun trainingTheMuscle(muscle: Muscle) = muscleGroups().contains(muscle)
+
+    fun equalsOrMoreThatTimeOfRoutine(time: Int) = allDurationOfExcercise().any { time >= it }
+
     fun muscleGroups() = listOfExcercise.flatMap { it.activity.muscleInTraining }.toSet()
+
+    fun allDurationOfExcercise() = listOfExcercise.map { it.duration() }
 
     fun frequencyCardiacBase() = listOfExcercise.sumOf { it.frequencyBase } / numbersOfExcerciseInTheList()
 
@@ -34,9 +40,19 @@ class Routine(
 
     fun theUserIsFollower(user: User) = listOfFollowers.contains(user)
 
-    fun isCompletyFor(user: User) = allActivityCanTrainBasicMuscleGroup() //||
+    fun isCompletyFor(user: User) = allActivityCanTrainBasicMuscleGroup() || user.isSatisfied(this)
 
-    private fun allActivityCanTrainBasicMuscleGroup() = allActivity().all{it.trainingBasicGroup()}
+    private fun allActivityCanTrainBasicMuscleGroup() = allActivity().all { it.trainingBasicGroup() }
 
     private fun allActivity() = listOfExcercise.map { it.activity }
+
+    fun isHealthy(user: User): Boolean {
+
+        val freq = user.frequencyCardiacOfTraining()
+
+        return freq.toInt() in (user.frequencyCardiacReserve()..user.maximunFrequencyCardiac())
+    }
+
+    fun isCompletyAndHealthy(user: User) = isCompletyFor(user) && isHealthy(user)
+
 }

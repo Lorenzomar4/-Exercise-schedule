@@ -8,6 +8,8 @@ import java.time.LocalDate
 class TestOfUser : DescribeSpec({
 
     val lawrence = User("Lawrence", "Martinez", LocalDate.of(1998, 11, 8))
+    val lawrence2 = User("Lawrence", "Martinez", LocalDate.of(1998, 11, 8))
+
     val maria = User("Maria", "Martinez", LocalDate.of(2010, 11, 8))
 
     describe("testing that age of lawrence be 23 years") {
@@ -116,5 +118,7 @@ class TestOfUser : DescribeSpec({
         }
 
     }
+
+
 
 })

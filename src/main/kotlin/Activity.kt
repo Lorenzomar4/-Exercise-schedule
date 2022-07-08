@@ -6,6 +6,9 @@ class Activity(
     fun addMuscle(muscle: Muscle) {
         muscleInTraining.add(muscle)
     }
+    fun removeMuscle(muscle: Muscle){
+        muscleInTraining.remove(muscle)
+    }
 
 
     fun trainingBasicGroup() = muscleInTraining.containsAll(basic())
@@ -17,3 +20,4 @@ class Activity(
 enum class Muscle {
     LEG, SHOULDERS, ARMS, CHEST, BACK, BUTTOCKS, ABDOMEN
 }
+
