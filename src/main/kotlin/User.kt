@@ -93,7 +93,7 @@ class User(
 
     fun frequencyCardiacOfTraining()=frequencyCardiacReserve()*(percentageOfTraining/100)  + frequencyCardiacInRepose()
 
-    fun canDoTheRoutine(anRoutine: Routine) =anRoutine.isCompletyAndHealthy(this)
+    fun canDoTheRoutine(anRoutine: Routine) =anRoutine.isCompleteAndHealthy(this)
 
 }
 

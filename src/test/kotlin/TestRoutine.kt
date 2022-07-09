@@ -136,18 +136,6 @@ class TestRuotine : DescribeSpec({
             anRoutine.isCompletyFor(carmen) shouldBe false
         }
     }
-    describe("Testing the method isHealthy of routina") {
-        it("is not healthy") { //192-127
-            lawrence.assigPorcentOfTraining(1f)
-            anRoutine.isHealthy(lawrence) shouldBe false
 
-        }
-        it("is healthy ") {
-            lawrence.assigPorcentOfTraining(90f)
-            anRoutine.isHealthy(lawrence) shouldBe true
-            anRoutine.isCompletyFor(lawrence) shouldBe true
-        }
-
-    }
 
 })

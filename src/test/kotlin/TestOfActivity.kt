@@ -15,4 +15,5 @@ class TestOfActivity : DescribeSpec({
             anActivity.trainingBasicGroup() shouldBe true
         }
     }
+
 })

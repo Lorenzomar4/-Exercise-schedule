@@ -48,11 +48,11 @@ class Routine(
 
     fun isHealthy(user: User): Boolean {
 
-        val freq = user.frequencyCardiacOfTraining()
+        val freq = frequencyBaseReachedByUser(user)
 
-        return freq.toInt() in (user.frequencyCardiacReserve()..user.maximunFrequencyCardiac())
+        return freq in (user.frequencyCardiacReserve()..user.maximunFrequencyCardiac())
     }
 
-    fun isCompletyAndHealthy(user: User) = isCompletyFor(user) && isHealthy(user)
+    fun isCompleteAndHealthy(user: User) = isCompletyFor(user) && isHealthy(user)
 
 }

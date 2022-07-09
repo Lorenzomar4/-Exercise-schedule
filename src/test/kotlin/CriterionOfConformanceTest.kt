@@ -2,7 +2,7 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import java.time.LocalDate
 
-class UserGoalTest : DescribeSpec({
+class CriterionOfConformanceTest : DescribeSpec({
     val anActivity = Activity("unknown").apply {
         addMuscle(Muscle.ABDOMEN)
        // addMuscle(Muscle.ARMS)
@@ -113,5 +113,6 @@ class UserGoalTest : DescribeSpec({
             lawrence.isSatisfied(anRoutine) shouldBe false
         }
     }
+    //The TheAthlete test is in the testComplete archive
 
 })

@@ -9,7 +9,6 @@ class Timer : ConformanceCriterion {
     override fun canBeFulfilled(user: User, anRoutine: Routine) =
         user.daysOfTraining.values.any { anRoutine.equalsOrMoreThatTimeOfRoutine(it) } ||
                 anRoutine.duration() >= user.weeklyMinutesOptime()
-
 }
 
 class TheNegate : ConformanceCriterion {
@@ -24,18 +23,28 @@ class TheConformist : ConformanceCriterion {
         user.listOfMuscleTrain.all { anRoutine.trainingTheMuscle(it) }
 
 
-
 }
-open class TheUndecided : ConformanceCriterion{
 
-    override fun canBeFulfilled(user: User, anRoutine: Routine)=returnCriterion().canBeFulfilled(user,anRoutine)
+open class TheUndecided : ConformanceCriterion {
 
-    fun returnCriterion() =if (numberOftheDay()%2==0) TheConformist() else TheNegate()
+    override fun canBeFulfilled(user: User, anRoutine: Routine) = returnCriterion().canBeFulfilled(user, anRoutine)
+
+    fun returnCriterion() = if (numberOftheDay() % 2 == 0) TheConformist() else TheNegate()
 
     open fun numberOftheDay() = LocalDate.now().dayOfWeek.value
 
 }
-class StubTheUndecided (var day : Int)  : TheUndecided(){
+
+class StubTheUndecided(var day: Int) : TheUndecided() {
     override fun numberOftheDay() = day
+}
+
+class TheAthlete : ConformanceCriterion {
+    override fun canBeFulfilled(user: User, anRoutine: Routine): Boolean {
+        val frequencyBaseReachedByUserAux = anRoutine.frequencyBaseReachedByUser(user)
+        val range = (user.frequencyCardiacOfTraining() * 0.90..user.frequencyCardiacOfTraining() * 1.10)
+
+        return frequencyBaseReachedByUserAux.toDouble() in range
+    }
 }
 
